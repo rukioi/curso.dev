@@ -1,58 +1,42 @@
-import React, { useEffect } from 'react';
-import '../styles/global.css'; // Importa o CSS global
+// pages/index.js
+import React, { useState } from 'react';
 
 const Home = () => {
+  const [avisoVisivel, setAvisoVisivel] = useState(true);
+  const [popupVisivel, setPopupVisivel] = useState(false);
 
-  useEffect(() => {
-    // Função para fechar o aviso
-    function fecharAviso() {
-      const aviso = document.getElementById('aviso');
-      if (aviso) aviso.style.display = 'none';
+  const fecharAviso = () => {
+    setAvisoVisivel(false);
+    setPopupVisivel(true);
+  };
 
-      // Exibir o pop-up após o fechamento do aviso
-      const popup = document.getElementById('popup');
-      if (popup) popup.style.display = 'flex';
-    }
-
-    // Função para fechar o pop-up
-    function fecharPopup() {
-      const popup = document.getElementById('popup');
-      if (popup) popup.style.display = 'none';
-    }
-
-    // Adiciona o evento de clique para fechar o aviso
-    const fecharBtn = document.getElementById('fecharBtn');
-    if (fecharBtn) {
-      fecharBtn.addEventListener('click', fecharAviso);
-    }
-
-    // Adiciona o evento de clique para fechar o pop-up
-    const popupBtn = document.getElementById('popupBtn');
-    if (popupBtn) {
-      popupBtn.addEventListener('click', fecharPopup);
-    }
-
-  }, []);
+  const fecharPopup = () => {
+    setPopupVisivel(false);
+  };
 
   return (
     <>
-      <div id="aviso">
-        <div className="aviso-content">
-          <h1>ATENÇÃO!</h1>
-          <h2>VOCÊ FOI HACKeADO!</h2>
-          <p>Seus dados estão comprometidos.</p>
-          <button id="fecharBtn">Fechar</button>
+      {avisoVisivel && (
+        <div id="aviso">
+          <div className="aviso-content">
+            <h1>ATENÇÃO!</h1>
+            <h2>VOCÊ FOI HACKeADO!</h2>
+            <p>Seus dados estão comprometidos.</p>
+            <button onClick={fecharAviso}>Fechar</button>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Pop-up */}
-      <div id="popup" className="popup">
-        <div className="popup-content">
-          <h2>Por que você fez isso?</h2>
-          <p>HAHAHA! Agora estou dentro do seu dispositivo!</p>
-          <button id="popupBtn">OK</button>
+      {popupVisivel && (
+        <div id="popup" className="popup">
+          <div className="popup-content">
+            <h2>Por que você fez isso?</h2>
+            <p>HAHAHA! Agora estou dentro do seu dispositivo!</p>
+            <button onClick={fecharPopup}>OK</button>
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 };
