@@ -25,7 +25,7 @@ if (typeof window !== "undefined") {
     // Adiciona o evento de clique para fechar o pop-up
     const popupBtn = document.getElementById('popupBtn');
     if (popupBtn) {
-      popupBtn.addEventListener('click', fecharPopup);
+      popupBtn.addEventListener('clik', fecharPopup);
     }
   });
 }
